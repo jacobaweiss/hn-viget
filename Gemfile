@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.6'
 gem 'pg'
+gem 'populator',          '~> 1.0.0'
+gem 'faker',              '~> 1.0.1'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -22,8 +24,6 @@ group :development, :test do
   gem 'shoulda-matchers',   '~> 1.1.0'
   gem 'factory_girl_rails', '~> 1.7.0'
   gem 'pry',                '~> 0.9.8.4'
-	gem 'populator',          '~> 1.0.0'
-	gem 'faker',              '~> 1.0.1'
 end
 
 group :test do
