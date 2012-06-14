@@ -1,0 +1,25 @@
+<table>
+	<% @articles.each do |article| %>
+	  <tr>
+			<td>
+				<% if article.url.present? %>
+					<%= link_to article.title, article.url %> | (<%= article.url %>)
+				<% else %>
+					<%= link_to article.title, article %>
+				<% end %>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				created <%= time_ago_in_words(article.created_at) %> | <%= link_to 'comments', article %> | <%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %>
+			</td>
+		</tr>
+		<tr>
+			<td><div class="clear"></td>
+		</tr>
+	<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Article', new_article_path %>
