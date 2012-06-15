@@ -1,4 +1,6 @@
 class Article < ActiveRecord::Base
+  belongs_to :user
+  
   attr_accessible :text, :title, :url
   
   validates :title, :presence => true

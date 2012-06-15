@@ -4,12 +4,19 @@ namespace :db do
     require 'populator'
     require 'faker'
     
+    User.delete_all
     Article.delete_all
     
-    Article.populate 50 do |article|
-      article.title = Faker::Lorem.sentence
-      article.url =   Faker::Internet.url
-      article.text =  Faker::Lorem.sentence
+    50.times do
+      @user = User.create(:email => Faker::Internet.email,
+                          :password => "foo",
+                          :password_confirmation => "foo")
+      
+      4.times do
+        @user.articles.create(:title => Faker::Lorem.sentence,
+                              :url   => Faker::Internet.url,
+                              :text  => Faker::Lorem.sentence)
+      end
     end
   end
 end

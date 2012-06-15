@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   include SimplestAuth::Model
   
+  has_many :articles
+  
   attr_accessible :email, :password, :password_confirmation
   attr_accessor :password
   

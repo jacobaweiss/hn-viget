@@ -5,6 +5,7 @@ gem 'pg'
 gem 'populator',          '~> 1.0.0'
 gem 'faker',              '~> 1.0.1'
 gem "simplest_auth",      "~> 0.3.1"
+gem "kaminari",           "~> 0.13.0"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
