@@ -2,10 +2,12 @@ require 'spec_helper'
 
 describe "Articles" do
   describe "as a visitor" do
-    before do
-      user1 = User.create(:email => 'michael@bluth.org', :password => 'her', :password_confirmation => 'her')
-      user1.articles.create(:title => "Bob Loblaw's Law Blog", :text => "Is she funny or something?")
-    end
+    let(:user) { Factory(:user) }
+    let!(:article) { Factory(:article, :user => user, :title => "Bob Loblaw's Law Blog", :text => "Is she funny or something?") }
+    # before do
+    #   user1 = User.create(:email => 'michael@bluth.org', :password => 'her', :password_confirmation => 'her')
+    #   user1.articles.create(:title => "Bob Loblaw's Law Blog", :text => "Is she funny or something?")
+    # end
     
     it "Visit the index" do
       visit '/'
