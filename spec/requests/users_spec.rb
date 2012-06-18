@@ -4,7 +4,13 @@ describe "Users" do
   describe "when viewing as a visitor" do
     # must re-prepare test db for this test to work
     it "allows users to sign up" do
-      sign_up
+      visit '/signup'
+
+      fill_in 'user_email', :with => 'buster@bluth.org'
+      fill_in 'user_password', :with => 'foobar'
+      fill_in 'user_password_confirmation', :with => 'foobar'
+
+      click_button('Create User')
     
       page.should have_content('Your account has been successfully created!')
     end
