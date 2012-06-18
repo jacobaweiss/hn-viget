@@ -1,0 +1,16 @@
+<h1><%= @user.email %></h1>
+
+<table>
+	<tr>
+		<td>
+  		<strong>Member since:</strong>
+	  	<%= @user.created_at.strftime("%B %d, %Y") %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<strong>Articles submitted:</strong>
+			<%= @user.articles.count %>
+		</td>
+	</tr>
+</table>
