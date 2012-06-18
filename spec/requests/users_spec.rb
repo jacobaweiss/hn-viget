@@ -1,7 +1,6 @@
 require 'spec_helper'
 
-describe "Users" do
-  
+describe "Users" do  
   describe "when viewing as a visitor" do
     # must re-prepare test db for this test to work
     it "allows users to sign up" do
