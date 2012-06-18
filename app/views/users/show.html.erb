@@ -13,4 +13,11 @@
 			<%= @user.articles.count %>
 		</td>
 	</tr>
+	<% if @user == current_user %>
+		<tr>
+			<td>
+				<%= link_to 'Change your password', '/change_password' %>
+			</td>
+		</tr>
+	<% end %>
 </table>
