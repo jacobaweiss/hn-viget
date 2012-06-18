@@ -1,4 +1,4 @@
-h4xx0r n3wz
+Haxxor News
 ===========
 a news-aggregator project
 -------------------------

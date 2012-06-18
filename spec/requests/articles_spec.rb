@@ -1,69 +1,86 @@
 require 'spec_helper'
 
 describe "Articles" do
-  let!(:article) { Factory(:article, :title => 'Ruby Title', :text => 'stuff') }
-  
-  it "Visit the index" do
-    visit '/'
+  describe "as a visitor" do
+    before do
+      user1 = User.create(:email => 'michael@bluth.org', :password => 'her', :password_confirmation => 'her')
+      user1.articles.create(:title => "Bob Loblaw's Law Blog", :text => "Is she funny or something?")
+    end
     
-    page.should have_content('Ruby Title')
-  end
-  
-  it "visits an article page" do
-    visit "/articles/#{article.id}"
+    it "Visit the index" do
+      visit '/'
     
-    page.should have_content('stuff')
+      page.should have_content("Bob Loblaw's Law Blog")
+    end
+  
+    it "visits an article page" do
+      article = Article.first
+      visit "/articles/#{article.id}"
+    
+      page.should have_content("Is she funny or something?")
+    end
+    
+    it "cannot create an article" do
+      visit '/articles/new'
+      
+      page.should have_content("You must be logged in to access this section")
+    end
   end
 
-  it "can create a new article" do
-    visit '/articles/new'
-    
-    fill_in 'Title', :with => 'Ruby Title'
-    fill_in 'Text', :with => 'This is an article'
-    
-    click_button('Create Article')
-    
-    page.should have_content('Article was successfully created.')
-  end
+  describe "as a user" do
+    before { log_in }
+    it "can create a new article" do
+      visit '/articles/new'
   
-  it "won't create an invalid article" do
-    visit "/articles/new"
+      fill_in 'Title', :with => "Bob Loblaw's Law Blog"
+      fill_in 'Text', :with => "Is she funny or something?"
     
-    click_button('Create Article')
+      click_button('Create Article')
     
-    page.should have_content('Article text or url must be present')
-    page.should have_content("Title can't be blank")
-  end
+      page.should have_content('Article was successfully created.')
+    end
   
-  it "can edit an article" do
-    visit "/articles/#{article.id}/edit"
+    it "won't create an invalid article" do
+      visit "/articles/new"
+    
+      click_button('Create Article')
+    
+      page.should have_content('Article text or url must be present')
+      page.should have_content("Title can't be blank")
+    end
   
-    fill_in 'Url', :with => 'http://foo.bar'
+    it "can edit an article" do
+      make_post
+
+      fill_in 'Url', :with => 'http://foo.bar'
     
-    click_button 'Update Article'
+      click_button 'Update Article'
     
-    visit "/articles/#{article.id}"
+      visit "/articles/#{@article.id}"
     
-    page.should have_content('http://foo.bar')
-  end
+      page.should have_content('http://foo.bar')
+    end
   
-  it "cannot update an invalid article" do
-    visit "/articles/#{article.id}/edit"
+    it "cannot update an invalid article" do
+      make_post
     
-    fill_in 'Text', :with => ''
-    fill_in 'Url', :with => ''
+      fill_in 'Text', :with => ''
+      fill_in 'Url', :with => ''
     
-    click_button 'Update Article'
+      click_button 'Update Article'
   
-    page.should have_content('Article text or url must be present')
-  end
+      page.should have_content('Article text or url must be present')
+    end
   
-  it "can destroy a post" do
-    visit "/"
+    it "can destroy a post" do
+      make_post
+      visit "/"
+
+      click_link "Destroy"
     
-    click_link "Destroy"
-    
-    page.should_not have_content('Ruby Title')
+      page.should_not have_content("Bob Loblaw's Law Blog")
+    end
+  
   end
 
 end
