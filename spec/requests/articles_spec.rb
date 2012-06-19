@@ -1,17 +1,14 @@
 require 'spec_helper'
 
 describe "Articles" do
+  let(:user) { Factory(:user, :email => "lindsey@bluth.org") }
+  let!(:article) { Factory(:article, :user => user, :title => "Bob Loblaw's Law Blog", :text => "Is she funny or something?") }
   describe "as a visitor" do
-    let(:user) { Factory(:user, :email => "gob@bluth.org") }
-    let!(:article) { Factory(:article, :user => user, :title => "Bob Loblaw's Law Blog", :text => "Is she funny or something?") }
-    # before do
-    #   user1 = User.create(:email => 'michael@bluth.org', :password => 'her', :password_confirmation => 'her')
-    #   user1.articles.create(:title => "Bob Loblaw's Law Blog", :text => "Is she funny or something?")
-    # end
+    # let(:user) { Factory(:user, :email => "gob@bluth.org") }
+    # let!(:article) { Factory(:article, :user => user, :title => "Bob Loblaw's Law Blog", :text => "Is she funny or something?") }
     
     it "Visit the index" do
       visit '/'
-    
       page.should have_content("Bob Loblaw's Law Blog")
     end
   
@@ -34,8 +31,8 @@ describe "Articles" do
     it "can create a new article" do
       visit '/articles/new'
   
-      fill_in 'Title', :with => "Bob Loblaw's Law Blog"
-      fill_in 'Text', :with => "Is she funny or something?"
+      fill_in 'Title', :with => "Bees?"
+      fill_in 'Text', :with => "No, beads!"
     
       click_button('Create Article')
     
@@ -52,30 +49,26 @@ describe "Articles" do
     end
   
     it "can edit an article" do
-      make_post
-
+      visit "/articles/#{article.id}/edit"
+      
       fill_in 'Url', :with => 'http://foo.bar'
-    
       click_button 'Update Article'
     
-      visit "/articles/#{@article.id}"
-    
+      visit "/articles/#{article.id}"
       page.should have_content('http://foo.bar')
     end
   
-    it "cannot update an invalid article" do
-      make_post
+    it "cannot update an with invalid information" do
+      visit "/articles/#{article.id}/edit"
     
       fill_in 'Text', :with => ''
       fill_in 'Url', :with => ''
-    
       click_button 'Update Article'
   
       page.should have_content('Article text or url must be present')
     end
   
     it "can destroy a post" do
-      make_post
       visit "/"
 
       click_link "Destroy"

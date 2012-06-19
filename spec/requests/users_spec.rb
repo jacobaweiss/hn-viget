@@ -1,13 +1,14 @@
 require 'spec_helper'
 
 describe "Users" do  
+  let!(:user) { Factory(:user) }
   describe "when viewing as a visitor" do
     it "allows users to sign up" do
       visit '/signup'
 
-      fill_in 'user_email', :with => 'buster@bluth.org'
-      fill_in 'user_password', :with => 'foobar'
-      fill_in 'user_password_confirmation', :with => 'foobar'
+      fill_in 'Email', :with => 'buster@bluth.org'
+      fill_in 'Password', :with => 'foobar'
+      fill_in 'Password confirmation', :with => 'foobar'
 
       click_button('Create User')
     
@@ -15,9 +16,13 @@ describe "Users" do
     end
     
     it "requires new sign up info" do
-      user = User.create(:email => "buster@bluth.org", :password => "foobar", :password_confirmation => "foobar")
-      sign_up
-      
+      visit '/signup'
+
+      fill_in 'user_email', :with => 'lindsey@bluth.org'
+      fill_in 'user_password', :with => 'foobar'
+      fill_in 'user_password_confirmation', :with => 'foobar'
+
+      click_button('Create User')
       page.should have_content("Email has already been taken")
     end
   end
@@ -36,8 +41,8 @@ describe "Users" do
     
     it "can change user's password" do
       visit '/change_password'
-      fill_in 'user_password', :with => 'beads'
-      fill_in 'user_password_confirmation', :with => 'beads'
+      fill_in 'New password', :with => 'carl'
+      fill_in 'Confirm new password', :with => 'carl'
       click_button 'Change Password'
       page.should have_content('Your password has been changed!')
     end

@@ -1,5 +1,4 @@
 class UserMailer < ActionMailer::Base
-  require 'securerandom'
   default from: "1337krew@haxxornews.com"
   
   def reset_password(user)
