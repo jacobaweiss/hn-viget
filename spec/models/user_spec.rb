@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe User do
   
-  subject { Factory(:user) }
+  subject { Factory(:user, :email => "georgemichael@bluth.org", :password => "maebe", :password_confirmation => "maebe") }
   
   describe "validations" do
     it { should validate_presence_of(:email) }

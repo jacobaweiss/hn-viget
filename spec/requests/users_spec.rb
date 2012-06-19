@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe "Users" do  
   describe "when viewing as a visitor" do
-    # must re-prepare test db for this test to work
     it "allows users to sign up" do
       visit '/signup'
 
@@ -33,6 +32,14 @@ describe "Users" do
       visit '/'
       click_link 'Log Out'
       page.should have_content('You have been signed out!')
+    end
+    
+    it "can change user's password" do
+      visit '/change_password'
+      fill_in 'user_password', :with => 'beads'
+      fill_in 'user_password_confirmation', :with => 'beads'
+      click_button 'Change Password'
+      page.should have_content('Your password has been changed!')
     end
   end
 end
