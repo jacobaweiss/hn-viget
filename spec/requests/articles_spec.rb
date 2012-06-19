@@ -1,12 +1,10 @@
 require 'spec_helper'
 
 describe "Articles" do
-  let(:user) { Factory(:user, :email => "lindsey@bluth.org") }
+  let(:user) { Factory(:user) }
   let!(:article) { Factory(:article, :user => user, :title => "Bob Loblaw's Law Blog", :text => "Is she funny or something?") }
+  
   describe "as a visitor" do
-    # let(:user) { Factory(:user, :email => "gob@bluth.org") }
-    # let!(:article) { Factory(:article, :user => user, :title => "Bob Loblaw's Law Blog", :text => "Is she funny or something?") }
-    
     it "Visit the index" do
       visit '/'
       page.should have_content("Bob Loblaw's Law Blog")
