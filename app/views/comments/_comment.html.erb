@@ -1,0 +1,13 @@
+<li class="comment">	
+	<div class="comment_content">
+		<%= comment.content %>
+	</div>
+	
+	<p><%= User.find(comment.user_id).email %> | <%= link_to 'Reply', new_comment_comment_path(comment) %></p>
+	
+	<% unless comment.comments.empty? %>
+		<ul class="comment_list">
+			<%= render :partial => "comments/comment", :collection => comment.comments %>
+		</ul>
+	<% end %>
+</li>
