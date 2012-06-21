@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_filter :require_login, :only => [:new, :create]
   before_filter :get_parent
+  before_filter :time_limit, :only => [:edit]
   
   def new
     @comment = @parent.comments.build
@@ -18,7 +19,7 @@ class CommentsController < ApplicationController
   end
   
   def edit
-    @comment = @parent.comments.find(params[:id])
+    # @comment = @parent.comments.find(params[:id])
   end
 
   def update
@@ -37,5 +38,12 @@ class CommentsController < ApplicationController
     @parent = Comment.find_by_id(params[:comment_id]) if params[:comment_id]
     
     redirect_to "/" unless defined?(@parent)
+  end
+  
+  def time_limit
+    @comment = @parent.comments.find(params[:id])
+    if (Time.now - @comment.created_at).to_i > 5.minutes.to_i
+      redirect_to @comment.article, :notice => "Too much time has passed to update this comment."
+    end
   end
 end

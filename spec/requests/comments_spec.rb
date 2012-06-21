@@ -3,8 +3,9 @@ require 'spec_helper'
 describe "Comments" do
   let!(:user) { Factory(:user) }
   let!(:comment) { Factory(:comment, :user => user, :comments => [nested_comment] ) }
+  let!(:expired_comment) { Factory(:comment, :user => user, :created_at => (Time.now - 20.minutes)) }
   let!(:nested_comment) { Factory(:comment, :user => user, :content => "This is a nested comment.") }
-  let!(:article) { Factory(:article, :comments => [comment], :user => user) }
+  let!(:article) { Factory(:article, :comments => [expired_comment, comment], :user => user) }
 
   describe "viewed on an article page" do
     before { visit article_path(article) }
@@ -51,6 +52,13 @@ describe "Comments" do
         
         page.should have_content('This comment has been edited!')
       end
+      
+      it "cannot edit a comment after 5 minutes" do
+        visit "#{expired_comment.article.id}/comments/#{expired_comment.id}/edit"
+     
+        page.should have_content('Too much time has passed to update this comment.')
+      end
+      
     end
   end
 

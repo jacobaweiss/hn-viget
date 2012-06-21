@@ -11,4 +11,5 @@ class Comment < ActiveRecord::Base
     return @article if defined?(@article)
     @article = commentable.is_a?(Article) ? commentable : commentable.article
   end
+
 end
