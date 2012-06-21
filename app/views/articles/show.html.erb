@@ -1,21 +1,23 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Title:</b>
-  <%= @article.title %>
-</p>
-
-<p>
-  <b>Url:</b>
-  <%= @article.url %>
-</p>
-
-<p>
-  <b>Text:</b>
-  <%= @article.text %>
-</p>
+<!-- <p id="notice"><%= notice %></p> -->
+<h1><%= @article.title %></h1>
+<table>
+	<tr>
+		<td><%= link_to @article.url, @article.url %></td>
+	</tr>
+	<tr>
+		<td><%= @article.text %></td>
+	</tr>
+</table>
 
 <% if current_user == @article.user %>
 	<%= link_to "Edit", edit_article_path(@article) %> |
 <% end %>
 <%= link_to 'Back', articles_path %>
+
+<h2>Comments</h2>
+
+<p><%= link_to "Add a comment", new_article_comment_path(@article) %></p>
+
+<ul class="comment_list">
+	<%= render :partial => "comments/comment", :collection => @article.comments %>
+</ul>

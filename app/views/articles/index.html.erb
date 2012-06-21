@@ -11,7 +11,7 @@
 		</tr>
 		<tr>
 			<td>
-				created <%= time_ago_in_words(article.created_at) %> ago by <%= link_to article.user.email, article.user %> | <%= link_to 'comments', article %> 
+				created <%= time_ago_in_words(article.created_at) %> ago by <%= link_to article.user.email, article.user %> | <%= link_to pluralize(article.comments.count, 'comment'), article %> 
 				<% if current_user == article.user %>
 					<%= link_to " | Destroy", article, method: :delete, data: { confirm: 'Are you sure?' } %>
 				<% end %>

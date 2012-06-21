@@ -13,6 +13,12 @@
 			<%= @user.articles.count %>
 		</td>
 	</tr>
+	<tr>
+		<td>
+			<strong>Comments submitted:</strong>
+			<%= @user.comments.count %>
+		</td>
+	</tr>
 	<% if @user == current_user %>
 		<tr>
 			<td>
