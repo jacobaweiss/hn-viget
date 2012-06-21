@@ -17,6 +17,19 @@ class CommentsController < ApplicationController
     end
   end
   
+  def edit
+    @comment = @parent.comments.find(params[:id])
+  end
+
+  def update
+    @comment = @parent.comments.find(params[:id])
+    if @comment.update_attributes(params[:comment])
+      redirect_to article_path(@comment.article), :notice => "Your comment has been saved!"
+    else
+      render :action => 'edit'
+    end
+  end
+  
   private
   
   def get_parent

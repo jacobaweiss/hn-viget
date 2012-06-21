@@ -43,7 +43,14 @@ describe "Comments" do
         page.should have_content('Your comment has been saved!')
       end
 
-      
+      it "can edit user's own comment" do
+        click_link 'Edit Comment'
+        
+        fill_in 'Leave a comment', :with => "This comment has been edited!"
+        click_button 'Update Comment'
+        
+        page.should have_content('This comment has been edited!')
+      end
     end
   end
 
