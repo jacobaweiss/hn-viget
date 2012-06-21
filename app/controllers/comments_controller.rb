@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id
     
     if @comment.save
-      redirect_to article_path(@comment.article), :notice => "Your commend has been saved!"
+      redirect_to article_path(@comment.article), :notice => "Your comment has been saved!"
     else
       render :action => 'new'
     end
