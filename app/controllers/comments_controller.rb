@@ -41,7 +41,7 @@ class CommentsController < ApplicationController
   
   def time_limit
     @comment = @parent.comments.find(params[:id])
-    if (Time.now - @comment.created_at).to_i > 5.minutes.to_i
+    if (Time.now - @comment.created_at) > 5.minutes
       redirect_to @comment.article, :notice => "Too much time has passed to update this comment."
     end
   end
