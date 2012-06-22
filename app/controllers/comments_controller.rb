@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id
     
     if @comment.save
-      redirect_to article_path(@comment.article), :notice => "Your comment has been saved!"
+      redirect_to article_url(@comment.article), :notice => "Your comment has been saved!"
     else
       render :action => 'new'
     end
@@ -24,7 +24,7 @@ class CommentsController < ApplicationController
   def update
     @comment = @parent.comments.find(params[:id])
     if @comment.update_attributes(params[:comment])
-      redirect_to article_path(@comment.article), :notice => "Your comment has been saved!"
+      redirect_to article_url(@comment.article), :notice => "Your comment has been saved!"
     else
       render :action => 'edit'
     end
@@ -36,7 +36,7 @@ class CommentsController < ApplicationController
     @parent = Article.find_by_id(params[:article_id]) if params[:article_id]
     @parent = Comment.find_by_id(params[:comment_id]) if params[:comment_id]
     
-    redirect_to root_path unless defined?(@parent)
+    redirect_to root_url unless defined?(@parent)
   end
   
   def time_limit

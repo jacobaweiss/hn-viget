@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   def update
     if current_user.update_attributes(params[:user])
       flash[:success] = "Your password has been changed!"
-      redirect_to root_path
+      redirect_to root_url
     else
       render "password"
     end
