@@ -1,10 +1,10 @@
 Hn::Application.routes.draw do
   resources :articles do
-    resources :comments
+    resources :comments, :votes
   end
   
   resources :comments do
-    resources :comments
+    resources :comments, :votes
   end
   
   

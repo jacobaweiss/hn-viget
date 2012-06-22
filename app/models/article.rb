@@ -3,7 +3,7 @@ class Article < ActiveRecord::Base
   
   belongs_to :user
   has_many :comments, :as => :commentable
-  has_many :votes,    :as => :votable
+  has_many :votes,    :as => :votable, dependent: :destroy
   
   validates :title, :presence => true
   validate :text_or_url_are_present

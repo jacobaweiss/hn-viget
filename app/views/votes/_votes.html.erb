@@ -1,0 +1,6 @@
+<div class="voter">
+	<%= votable.votes.where(:value => true).count %>
+</div>
+<div class="voter">
+	<%= votable.votes.where(:value => false).count %>
+</div>
