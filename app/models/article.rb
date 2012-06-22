@@ -1,8 +1,9 @@
 class Article < ActiveRecord::Base
+  attr_accessible :text, :title, :url
+  
   belongs_to :user
   has_many :comments, :as => :commentable
-  
-  attr_accessible :text, :title, :url
+  has_many :votes,    :as => :votable
   
   validates :title, :presence => true
   validate :text_or_url_are_present
