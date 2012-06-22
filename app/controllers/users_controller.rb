@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       self.current_user = @user
       redirect_to @user
     else
-      render "new"
+      render :action => 'new'
     end
   end
   
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   def update
     if current_user.update_attributes(params[:user])
       flash[:success] = "Your password has been changed!"
-      redirect_to "/"
+      redirect_to root_path
     else
       render "password"
     end

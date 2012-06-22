@@ -7,10 +7,10 @@ class PasswordResetsController < ApplicationController
     if @user
       UserMailer.reset_password(@user).deliver
       flash[:notice] = "Your new password has been sent to your email!"
-      redirect_to "/"
+      redirect_to root_path
     else
       flash[:error] = "We could not find that email address on our servers."
-      redirect_to "/reset_password"
+      redirect_to reset_password_path
     end
   end
   

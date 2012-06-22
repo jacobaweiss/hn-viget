@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       redirect_to root_path
     else
       flash.now[:error] = "Couldn't find a user with those credentials."
-      render "new"
+      render :action => 'new'
     end
   end
   

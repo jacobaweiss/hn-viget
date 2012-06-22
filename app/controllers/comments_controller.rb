@@ -19,7 +19,6 @@ class CommentsController < ApplicationController
   end
   
   def edit
-    # @comment = @parent.comments.find(params[:id])
   end
 
   def update
@@ -37,7 +36,7 @@ class CommentsController < ApplicationController
     @parent = Article.find_by_id(params[:article_id]) if params[:article_id]
     @parent = Comment.find_by_id(params[:comment_id]) if params[:comment_id]
     
-    redirect_to "/" unless defined?(@parent)
+    redirect_to root_path unless defined?(@parent)
   end
   
   def time_limit
