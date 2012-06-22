@@ -11,4 +11,5 @@ Hn::Application.configure do
   config.assets.digest = true
   config.i18n.fallbacks = true
   config.active_support.deprecation = :notify
+  config.action_mailer.default_url_options = { :host => "http://empty-flower-9706.herokuapp.com/" }
 end

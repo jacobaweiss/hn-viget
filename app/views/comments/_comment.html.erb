@@ -3,8 +3,9 @@
 		<%= comment.content %>
 	</div>
 	
-	<p><%= User.find(comment.user_id).email %> | <%= link_to 'Reply', new_comment_comment_path(comment) %> | 
+	<p><%= User.find(comment.user_id).email %> | <%= link_to 'Reply', new_comment_comment_path(comment) %> 
 	<% if current_user == comment.user %>
+		 | 
 		<%= link_to 'Edit Comment', "/#{comment.commentable_type.downcase}s/#{comment.commentable_id}/comments/#{comment.id}/edit" %>
 	<% end %></p>
 	

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Hn</title>
+  <title>Haxxor News</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -9,7 +9,7 @@
 	<body>
 		<div class="container_12">
 			<div id="navigation" class="grid_12">
-				<div id ="logo" class="grid_2"><%= link_to 'Haxxor News', articles_path %></div>
+				<div id ="logo" class="grid_2"><%= link_to 'Haxxor News', root_path %></div>
 				<div class="grid_2"><%= link_to 'Submit', new_article_path %></div>
 				<% unless current_user %>
 					<div class="grid_2 prefix_6"><%= link_to 'Log In', login_path %> or <%= link_to 'Sign up', signup_path %></div>
