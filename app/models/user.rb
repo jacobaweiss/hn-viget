@@ -13,4 +13,8 @@ class User < ActiveRecord::Base
   validates :password_confirmation, :presence => true
   
   authenticate_by :email
+  
+  def has_voted?(votable)
+    votable.votes.find_by_user_id(self.id)
+  end  
 end

@@ -2,7 +2,17 @@
 	<% @articles.each do |article| %>
 	  <tr>
 			<td class="topline">
-				<%= render "votes/votes", :votable => article %>
+						<tr>
+							<td><%= article.vote_count %></td>
+						</tr>
+						<% unless current_user.has_voted?(article) %>
+							<tr>
+								<td><%= link_to image_tag("up.png", :height => '10'), article_upvote_path(article) %></td>
+							</tr>
+							<tr>
+								<td><%= link_to image_tag("down.png", :height => '10'), article_downvote_path(article) %></td>
+							</tr>
+						<% end %>
 			</td>
 			<td class="">
 				<% if article.url? %>

@@ -12,5 +12,9 @@ class Comment < ActiveRecord::Base
     return @article if defined?(@article)
     @article = commentable.is_a?(Article) ? commentable : commentable.article
   end
+  
+  def vote_count
+    self.votes.where(:value => true).count - self.votes.where(:value => false).count
+  end
 
 end

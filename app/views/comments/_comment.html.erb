@@ -1,6 +1,18 @@
 <li class="comment">	
 	<div class="comment_content">
-		<%= render "votes/votes", :votable => comment %>
+		<table>
+			<tr>
+				<td><%= comment.vote_count %></td>
+			</tr>
+			<% unless current_user.has_voted?(comment) %>
+				<tr>
+					<td><%= link_to image_tag("up.png", :height => '10'), comment_upvote_path(comment) %></td>
+				</tr>
+				<tr>
+					<td><%= link_to image_tag("down.png", :height => '10'), comment_downvote_path(comment) %></td>
+				</tr>
+			<% end %>
+		</table>
 		<%= comment.content %>
 	</div>
 	

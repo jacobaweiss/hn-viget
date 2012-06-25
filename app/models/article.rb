@@ -10,6 +10,10 @@ class Article < ActiveRecord::Base
   
   scope :chronological,  order("created_at DESC")
   
+  def vote_count
+    self.votes.where(:value => true).count - self.votes.where(:value => false).count
+  end
+  
   private
   
   def text_or_url_are_present

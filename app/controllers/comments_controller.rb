@@ -30,6 +30,24 @@ class CommentsController < ApplicationController
     end
   end
   
+  def upvote
+    @comment = Comment.find(params[:comment_id])
+    @comment.votes.create(:value => true, :user => current_user)
+    respond_to do |format|
+      format.html { redirect_to @comment.article }
+      format.js
+    end
+  end
+
+  def downvote
+    @comment = Comment.find(params[:comment_id])
+    @comment.votes.create(:value => false, :user => current_user)
+    respond_to do |format|
+      format.html { redirect_to @comment.article }
+      format.js
+    end
+  end
+  
   private
   
   def get_parent
