@@ -13,24 +13,4 @@ class User < ActiveRecord::Base
   validates :password_confirmation, :presence => true
   
   authenticate_by :email
-  
-  def has_voted?(votable)
-    votable.votes.find_by_user_id(self)
-  end
-
-  def upvote(votable)
-    if self.has_voted?(votable)
-      votable.votes.find_by_user_id(self).destroy
-    else
-      votable.votes.build(:value => true, :user => self)
-    end
-  end
-  
-  def downvote(votable)
-    if self.has_voted?(votable)
-      votable.votes.find_by_user_id(self).destroy
-    else
-      votable.votes.build(:value => false, :user => self)
-    end
-  end
 end

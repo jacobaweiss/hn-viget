@@ -1,20 +1,24 @@
 class VotesController < ApplicationController
+  before_filter :get_parent
+  
   def new
     @vote = Vote.new
   end
   
   def create
-    @vote = @votable.votes.build(params[:vote])
+    @vote = @parent.votes.build(params[:vote])
+    @vote.user = current_user
+    
     if @vote.save
-      flash[:success] = "Vote saved!"
+      redirect_to root_url
     else
-      flash[:error] = "Vote not saved!"
+      redirect_to root_url
     end
   end
   
-  def votable
-    @votable = Article.find_by_id(params[:article_id]) if params[:article_id]
-    @votable = Comment.find_by_id(params[:comment_id]) if params[:comment_id]
+  def get_parent
+    @parent = Article.find_by_id(params[:article_id]) if params[:article_id]
+    @parent = Comment.find_by_id(params[:comment_id]) if params[:comment_id]
   end
   
 end

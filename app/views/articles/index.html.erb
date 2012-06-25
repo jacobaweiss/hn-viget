@@ -4,7 +4,7 @@
 			<td class="topline">
 				<%= render "votes/votes", :votable => article %>
 			</td>
-			<td class="topline">
+			<td class="">
 				<% if article.url? %>
 					<%= link_to article.title, article.url %> | (<%= article.url %>)
 				<% else %>
@@ -13,7 +13,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="bottomline">
+			<td class="">
 				created <%= time_ago_in_words(article.created_at) %> ago by <%= link_to article.user.email, article.user %> | <%= link_to pluralize(article.comments.count, 'comment'), article %> 
 				<% if current_user == article.user %>
 				 	| 

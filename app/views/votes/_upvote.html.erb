@@ -1,0 +1,6 @@
+<%= form_for [votable, Vote.new] do |f| %>
+	<%= f.hidden_field :value, :value => true %>
+	<div class="action">
+		<%= f.submit "Upvote" %>
+	</div>
+<% end %>

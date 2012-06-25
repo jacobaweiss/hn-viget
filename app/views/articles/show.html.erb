@@ -7,6 +7,9 @@
 	<tr>
 		<td><%= @article.text %></td>
 	</tr>
+	<tr>
+		<td><%= render "votes/votes", :votable => @article %></td>
+	</tr>
 </table>
 
 <% if current_user == @article.user %>

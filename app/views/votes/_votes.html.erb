@@ -1,6 +1,5 @@
+<%= render "votes/upvote", :votable => votable %>
 <div class="voter">
-	<%= votable.votes.where(:value => true).count %>
+	<%= votable.votes.where(:value => true).count - votable.votes.where(:value => false).count %>
 </div>
-<div class="voter">
-	<%= votable.votes.where(:value => false).count %>
-</div>
+<%= render "votes/downvote", :votable => votable %>
