@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'spec_helper'
 
 describe "Votes" do
@@ -20,8 +21,8 @@ describe "Votes" do
     end
     
     it "should show the upvote and downvote arrows" do
-      page.should have_xpath("//img[@src = '/assets/up.png']")
-      page.should have_xpath("//img[@src = '/assets/down.png']")
+      page.should have_content("▲")
+      page.should have_content("▼")
     end
   end
   
@@ -32,8 +33,8 @@ describe "Votes" do
     end
     
     it "should not display the upvote and downvote arrows" do
-      page.should_not have_xpath("//img[@src = '/assets/up.png']")
-      page.should_not have_xpath("//img[@src = '/assets/down.png']")
+      page.should_not have_content("▲")
+      page.should_not have_content("▼")
     end
   end
 end

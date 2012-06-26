@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'spec_helper'
 
 describe "Users" do  
@@ -72,7 +73,8 @@ describe "Users" do
         end
         
         it "should not have images" do
-          page.should_not have_xpath("//img[@src = '/assets/up.png']")
+          page.should_not have_content("▲")
+          page.should_not have_content("▼")
         end
         
         it "cannot vote again" do
