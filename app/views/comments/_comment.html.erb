@@ -1,15 +1,17 @@
 <li class="comment">	
 	<div class="comment_content">
 		<table>
+			<% unless current_user && current_user.has_voted?(comment) %>
+				<tr>
+					<td id="up-comment-<%= comment.id %>"><%= link_to "▲", comment_upvote_path(comment), :remote => true %></td>
+				</tr>
+			<% end %>
 			<tr>
-				<td><%= comment.vote_count %></td>
+				<td id="vote-<%= comment.id %>"><%= comment.vote_count %></td>
 			</tr>
 			<% unless current_user && current_user.has_voted?(comment) %>
 				<tr>
-					<td><%= link_to image_tag("up.png", :height => '10'), comment_upvote_path(comment) %></td>
-				</tr>
-				<tr>
-					<td><%= link_to image_tag("down.png", :height => '10'), comment_downvote_path(comment) %></td>
+					<td id="down-comment-<%= comment.id %>"><%= link_to "▼", comment_downvote_path(comment), :remote => true %></td>
 				</tr>
 			<% end %>
 		</table>

@@ -1,16 +1,18 @@
 <!-- <p id="notice"><%= notice %></p> -->
 <h1><%= @article.title %></h1>
 <table>
-	<tr>
-		<td><%= @article.vote_count %></td>
-	</tr>
 	<% unless current_user && current_user.has_voted?(@article) %>
 		<tr>
-			<td><%= link_to image_tag("up.png", :height => '10'), article_upvote_path(@article) %></td>
+			<td id="up-article-<%= @article.id %>"><%= link_to "▲", article_upvote_path(@article), :remote => true %></td>
 		</tr>
-		<tr>
-			<td><%= link_to image_tag("down.png", :height => '10'), article_downvote_path(@article) %></td>
-		</tr>
+	<% end %>
+	<tr>
+		<td><span id="vote-<%= @article.id %>"><%= @article.vote_count %></span></td>
+	</tr>
+	<% unless current_user && current_user.has_voted?(@article) %>
+	<tr>
+		<td id="down-article-<%= @article.id %>"><%= link_to "▼", article_downvote_path(@article), :remote => true %></td>
+	</tr>
 	<% end %>
 	<tr>
 		<td><%= link_to @article.url, @article.url %></td>
