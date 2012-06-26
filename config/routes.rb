@@ -1,12 +1,13 @@
 Hn::Application.routes.draw do
   resources :articles do
     resources :comments
+    get :upvote, :downvote
   end
   
   resources :comments do
     resources :comments
+    get :upvote, :downvote
   end
-  
   
   resources :users, :except => [:destroy, :edit]
   resources :sessions, :only => [:new, :create, :destroy]

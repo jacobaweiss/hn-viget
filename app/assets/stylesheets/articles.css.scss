@@ -1,3 +1,20 @@
 // Place all the styles related to the articles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#index-page {
+	list-style-type: none;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 10px;
+	
+	li {
+		border-bottom-style: solid;
+		border-width: 1px;
+		padding: 10px;
+	}
+	
+	li:last-child {
+		border-bottom-style: none;
+	}
+}

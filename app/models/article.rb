@@ -1,13 +1,18 @@
 class Article < ActiveRecord::Base
+  attr_accessible :text, :title, :url
+  
   belongs_to :user
   has_many :comments, :as => :commentable
-  
-  attr_accessible :text, :title, :url
+  has_many :votes,    :as => :votable, dependent: :destroy
   
   validates :title, :presence => true
   validate :text_or_url_are_present
   
   scope :chronological,  order("created_at DESC")
+  
+  def vote_count
+    self.votes.where(:value => true).count - self.votes.where(:value => false).count
+  end
   
   private
   

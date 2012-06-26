@@ -1,5 +1,20 @@
 <li class="comment">	
 	<div class="comment_content">
+		<table>
+			<% unless current_user && current_user.has_voted?(comment) %>
+				<tr>
+					<td id="up-comment-<%= comment.id %>"><%= link_to "▲", comment_upvote_path(comment), :remote => true %></td>
+				</tr>
+			<% end %>
+			<tr>
+				<td id="vote-<%= comment.id %>"><%= comment.vote_count %></td>
+			</tr>
+			<% unless current_user && current_user.has_voted?(comment) %>
+				<tr>
+					<td id="down-comment-<%= comment.id %>"><%= link_to "▼", comment_downvote_path(comment), :remote => true %></td>
+				</tr>
+			<% end %>
+		</table>
 		<%= comment.content %>
 	</div>
 	

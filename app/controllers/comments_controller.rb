@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_filter :require_login, :only => [:new, :create]
+  before_filter :require_login
   before_filter :get_parent
   before_filter :time_limit, :only => [:edit]
   
@@ -27,6 +27,32 @@ class CommentsController < ApplicationController
       redirect_to article_url(@comment.article), :notice => "Your comment has been saved!"
     else
       render :action => 'edit'
+    end
+  end
+  
+  def upvote
+    @comment = Comment.find(params[:comment_id])
+    unless current_user.has_voted?(@comment)
+      @comment.votes.create(:value => true, :user => current_user)
+      respond_to do |format|
+        format.html { redirect_to @comment.article }
+        format.js
+      end
+    else
+      redirect_to @comment.article, :notice => "You have already voted on this."
+    end
+  end
+
+  def downvote
+    @comment = Comment.find(params[:comment_id])
+    unless current_user.has_voted?(@comment)
+      @comment.votes.create(:value => false, :user => current_user)
+      respond_to do |format|
+        format.html { redirect_to @comment.article }
+        format.js
+      end
+    else
+      redirect_to @comment.article, :notice => "You have already voted on this."
     end
   end
   

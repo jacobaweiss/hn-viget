@@ -16,6 +16,32 @@ class ArticlesController < ApplicationController
 
   def edit
   end
+  
+  def upvote
+    @article = Article.find(params[:article_id])
+    unless current_user.has_voted?(@article)
+      @article.votes.create(:value => true, :user => current_user)
+      respond_to do |format|
+        format.html { redirect_to @article }
+        format.js
+      end
+    else
+      redirect_to @article, :notice => "You have already voted on this."
+    end
+  end
+
+  def downvote
+    @article = Article.find(params[:article_id])
+    unless current_user.has_voted?(@article)
+      @article.votes.create(:value => false, :user => current_user)
+      respond_to do |format|
+        format.html { redirect_to @article }
+        format.js
+      end
+    else
+      redirect_to @article, :notice => "You have already voted on this."
+    end
+  end
 
   def create
     @article = self.current_user.articles.create(params[:article])
