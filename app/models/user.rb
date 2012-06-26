@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   authenticate_by :email
   
   def has_voted?(votable)
-    votable.votes.find_by_user_id(self.id)
+    votable.votes.find_by_user_id(self.id).present?
   end
   
   def karma
