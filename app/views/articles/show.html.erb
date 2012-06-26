@@ -7,7 +7,7 @@
 		</tr>
 	<% end %>
 	<tr>
-		<td><span id="vote-<%= @article.id %>"><%= @article.vote_count %></span></td>
+		<td><span id="vote-<%= @article.id %>"><%= @article.reputation %></span></td>
 	</tr>
 	<% unless current_user && current_user.has_voted?(@article) %>
 	<tr>

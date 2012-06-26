@@ -28,7 +28,7 @@
 					<% end %>
 				</span>
 				<span id="vote-<%= article.id %>">
-					<%= article.vote_count %>
+					<%= article.reputation %>
 				</span>
 				<span>
 					<% unless current_user && current_user.has_voted?(article) %>

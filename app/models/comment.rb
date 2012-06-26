@@ -13,8 +13,8 @@ class Comment < ActiveRecord::Base
     @article = commentable.is_a?(Article) ? commentable : commentable.article
   end
   
-  def vote_count
-    self.votes.where(:value => true).count - self.votes.where(:value => false).count
+  def reputation
+    self.votes.upvotes.count - self.votes.downvotes.count
   end
 
 end

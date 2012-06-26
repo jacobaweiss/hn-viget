@@ -5,4 +5,7 @@ class Vote < ActiveRecord::Base
   belongs_to :votable, :polymorphic => true
   
   validates_inclusion_of :value, :in => [true, false]
+  
+  scope :upvotes,      where(:value => true)
+  scope :downvotes,    where(:value => false)  
 end

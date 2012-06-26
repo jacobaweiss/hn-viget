@@ -9,9 +9,9 @@ class Article < ActiveRecord::Base
   validate :text_or_url_are_present
   
   scope :chronological,  order("created_at DESC")
-  
-  def vote_count
-    self.votes.where(:value => true).count - self.votes.where(:value => false).count
+
+  def reputation
+    self.votes.upvotes.count - self.votes.downvotes.count
   end
   
   private
