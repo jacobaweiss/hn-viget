@@ -19,6 +19,12 @@
 			<%= @user.comments.count %>
 		</td>
 	</tr>
+	<tr>
+		<td>
+			<strong>Karma:</strong>
+			<%= @user.karma %>
+		</td>
+	</tr>
 	<% if @user == current_user %>
 		<tr>
 			<td>

@@ -63,19 +63,26 @@ describe "Users" do
       end
       
       describe "once voted" do
+        let!(:vote)   { Factory(:vote, :value => true, :user => user) }
+        let!(:comment) { Factory(:comment, :user => user, :votes => [vote]) }
+        
         before do
           visit article_upvote_path(article)
           page.should have_content('1')
         end
         
         it "should not have images" do
-          save_and_open_page
           page.should_not have_xpath("//img[@src = '/assets/up.png']")
         end
         
         it "cannot vote again" do
           visit article_upvote_path(article)
           page.should have_content('You have already voted on this.')
+        end
+        
+        it "should update user's karma" do
+          visit user_path(user)
+          page.should have_content('2')
         end
       end
     end
