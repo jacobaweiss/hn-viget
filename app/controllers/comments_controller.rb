@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_filter :require_login, :only => [:new, :create]
+  before_filter :require_login
   before_filter :get_parent
   before_filter :time_limit, :only => [:edit]
   

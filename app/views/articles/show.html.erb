@@ -4,7 +4,7 @@
 	<tr>
 		<td><%= @article.vote_count %></td>
 	</tr>
-	<% unless current_user.has_voted?(@article) %>
+	<% unless current_user && current_user.has_voted?(@article) %>
 		<tr>
 			<td><%= link_to image_tag("up.png", :height => '10'), article_upvote_path(@article) %></td>
 		</tr>
