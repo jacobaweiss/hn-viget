@@ -20,13 +20,11 @@ class User < ActiveRecord::Base
   
   def karma
     karma = 0
-    
-    self.articles.each do |a|
-      karma += a.votes.where(:value => true).count - a.votes.where(:value => false).count
+    if self.articles.any?
+      karma += self.articles.map { |a| a.reputation }.reduce(&:+)
     end
-    
-    self.comments.each do |c|
-      karma += c.votes.where(:value => true).count - c.votes.where(:value => false).count
+    if self.comments.any?
+      karma += self.comments.map { |c| c.reputation }.reduce(&:+)
     end
     
     return karma
