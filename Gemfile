@@ -6,12 +6,12 @@ gem 'populator',          '~> 1.0.0'
 gem 'faker',              '~> 1.0.1'
 gem "simplest_auth",      "~> 0.3.1"
 gem "kaminari",           "~> 0.13.0"
+gem 'bootstrap-sass',     '~> 2.0.3.1'
 
 group :assets do
   gem 'sass-rails',       '~> 3.2.3'
   gem 'coffee-rails',     '~> 3.2.1'
   gem 'uglifier',         '>= 1.0.3'
-  gem 'bootstrap-sass',   '~> 2.0.3.1'
 end
 
 gem 'jquery-rails'
