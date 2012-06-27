@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
   before_filter :load_article, :only => [:edit, :update, :destroy]
   
   def index
-    @articles = Article.chronological.page(params[:page]).per(20)
+    @articles = Article.top_for(params[:duration]).page(params[:page]).per(10)
   end
 
   def show
@@ -21,6 +21,7 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:article_id])
     unless current_user.has_voted?(@article)
       @article.votes.create(:value => true, :user => current_user)
+      @article.reload
       respond_to do |format|
         format.html { redirect_to @article }
         format.js
@@ -34,6 +35,7 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:article_id])
     unless current_user.has_voted?(@article)
       @article.votes.create(:value => false, :user => current_user)
+      @article.reload
       respond_to do |format|
         format.html { redirect_to @article }
         format.js

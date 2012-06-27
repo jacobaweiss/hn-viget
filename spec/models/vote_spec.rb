@@ -8,6 +8,7 @@ describe Vote do
   describe "validations" do
     it { should belong_to(:user) }
     it { should belong_to(:votable) }
+    it { should validate_presence_of(:votable) }
     
     it "should require a vote value" do
       vote.value.should_not be_nil

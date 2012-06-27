@@ -1,5 +1,5 @@
 class Comment < ActiveRecord::Base
-  attr_accessible :content
+  attr_accessible :content, :reputation
   
   belongs_to :user
   belongs_to :commentable, :polymorphic => true
@@ -11,10 +11,6 @@ class Comment < ActiveRecord::Base
   def article
     return @article if defined?(@article)
     @article = commentable.is_a?(Article) ? commentable : commentable.article
-  end
-  
-  def reputation
-    self.votes.upvotes.count - self.votes.downvotes.count
   end
 
 end
