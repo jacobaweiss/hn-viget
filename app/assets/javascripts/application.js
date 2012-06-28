@@ -16,4 +16,4 @@
 //= require_tree .
 
 $(".alert").alert()
-$("/alert").alert('close)
+$("/alert").alert('close')

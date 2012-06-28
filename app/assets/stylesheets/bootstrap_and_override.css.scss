@@ -1,8 +1,8 @@
-/* @import "bootstrap";
-body { padding-top: 60px; }
-@import "bootstrap-responsive"; */
-
-body { padding-top: 50px; }
+body { 
+	padding-top: 50px;
+	background-image: url(grid-18px-masked.png);
+	background-repeat: repeat-x;
+	background-position: 0 40px; }
 @import url(https://fonts.googleapis.com/css?family=Telex);
 article,aside,details,figcaption,figure,footer,header,hgroup,nav,section{display:block;}
 audio,canvas,video{display:inline-block;*display:inline;*zoom:1;}
