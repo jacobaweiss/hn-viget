@@ -14,10 +14,10 @@ Hn::Application.routes.draw do
   resource :password_resets
 
   root :to => 'articles#index'
-  match '/articles',        :to => 'articles#index'
   match '/login',           :to => 'sessions#new'
   match '/logout',          :to => 'sessions#destroy', via: :delete
   match '/signup',          :to => 'users#new'
   match '/change_password', :to => 'users#password'
   match '/reset_password',  :to => 'password_resets#new'
+  match '/:duration',       :to => 'articles#index'
 end

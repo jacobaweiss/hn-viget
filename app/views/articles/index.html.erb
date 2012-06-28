@@ -1,3 +1,20 @@
+<div class="row">
+	<ul class="nav nav-pills">
+		<li><%= link_to 'Newest', root_path %></li>
+		<li class="dropdown" id="sortmenu">
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#sortmenu">
+				Top
+				<b class="caret"></b>
+			</a>
+			<ul class="dropdown-menu">
+				<li><a href="/day">Day</a></li>
+				<li><a href="/month">Month</a></li>
+				<li><a href="/year">Year</a></li>
+				<li><a href="/top">All Time</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
 <ul id="index-page">
 <% @articles.each do |article| %>
 	<li>
