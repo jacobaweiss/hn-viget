@@ -39,19 +39,7 @@
 			</tr>
 			<tr>
 				<td>
-				<span>
-					<% unless current_user && current_user.has_voted?(article) %>
-						<span id="up-article-<%= article.id %>"><%= link_to "▲", article_upvote_path(article), :remote => true %></span>
-					<% end %>
-				</span>
-				<span id="vote-<%= article.id %>">
-					<%= article.reputation %>
-				</span>
-				<span>
-					<% unless current_user && current_user.has_voted?(article) %>
-						<span id="down-article-<%= article.id %>"><%= link_to "▼", article_downvote_path(article), :remote => true %></span>
-					<% end %>
-				</span>
+					<%= render 'shared/votes', :votable => article %>
 				</td>
 			</tr>
 		</table>
