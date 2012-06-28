@@ -6,15 +6,26 @@
 	list-style-type: none;
 	border-style: solid;
 	border-width: 1px;
-	border-radius: 10px;
+	border-radius: 5px;
+	border-color: #ccc;
 	
 	li {
 		border-bottom-style: solid;
 		border-width: 1px;
 		padding: 10px;
+		padding-left: 25px;
+		border-color: #ccc;
 	}
 	
 	li:last-child {
 		border-bottom-style: none;
 	}
+}
+
+.form-page {
+	text-align: center;
+	 }
+	
+.form-title {
+	padding-bottom: 10px;
 }

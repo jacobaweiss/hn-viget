@@ -1,4 +1,4 @@
-<%= form_for [@parent, @comment] do |f| %>
+<%= form_for [@parent, @comment], :html => { :class => "well span3" } do |f| %>
 	<% if @comment.errors.any? %>
 	  <div id="error_explanation">
 	    <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this article from being saved:</h2>
@@ -13,10 +13,10 @@
 	
 	<div class="field">
 		<%= f.label :content, "Leave a comment" %><br />
-		<%= f.text_area :content %>
+		<%= f.text_area :content, :size => "26x4" %>
 	</div>
 	
 	<div class="action">
-		<%= f.submit "Add Comment" %>
+		<%= f.submit "Add Comment", :class => "btn btn-primary" %>
 	</div>
 <% end %>

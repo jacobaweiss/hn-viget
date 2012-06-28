@@ -2,8 +2,8 @@ class Article < ActiveRecord::Base
   attr_accessible :text, :title, :url, :reputation
   
   belongs_to :user
-  has_many :comments, :as => :commentable
-  has_many :votes,    :as => :votable, dependent: :destroy
+  has_many :comments, :as => :commentable,  dependent: :destroy
+  has_many :votes,    :as => :votable,      dependent: :destroy
   
   validates :title, :presence => true
   validate :text_or_url_are_present

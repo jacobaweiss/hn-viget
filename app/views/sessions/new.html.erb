@@ -1,16 +1,18 @@
-<h1>Log in</h1>
+<div class="form-page span4 offset4">
+	<h1 class="form-title">Log in</h1>
 
-<%= form_tag(sessions_path) do  %>
-	<div class="field">
-		<%= label_tag :email %><br />
-		<%= text_field_tag :email %>
-	</div>
-	<div class="field">
-		<%= label_tag :password %><br />
-		<%= password_field_tag :password %>
-	</div>
-	<%= submit_tag "Log in" %>
-<% end %>
-<p>
-	<%= link_to "Forgot your password?", reset_password_path %>
-</p>
+	<%= form_tag sessions_path, :class => "well span3" do  %>
+		<div class="field">
+			<%= label_tag :email %><br />
+			<%= text_field_tag :email %>
+		</div>
+		<div class="field">
+			<%= label_tag :password %><br />
+			<%= password_field_tag :password %>
+		</div>
+		<%= submit_tag "Log in", :class => "btn btn-primary" %>
+	<% end %>
+	<p>
+		<%= link_to "Forgot your password?", reset_password_path %>
+	</p>
+</div>
