@@ -1,3 +1,7 @@
-$("#vote-<%= @comment.id %>").text("<%= @comment.reputation %>")
-$("#up-comment-<%= @comment.id %>").text("")
-$("#down-comment-<%= @comment.id %>").text("")
+<% if current_user %>
+  $("#vote-<%= @comment.id %>").text("<%= @comment.reputation %>")
+  $("#up-comment-<%= @comment.id %>").text("")
+  $("#down-comment-<%= @comment.id %>").text("")
+<% else %>
+  $(window.location.replace("/login"))
+<% end %>
