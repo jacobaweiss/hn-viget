@@ -11,42 +11,44 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120622153519) do
+ActiveRecord::Schema.define(:version => 20120627175410) do
 
-  create_table "articles", :force => true do |t|
+  create_table "articles",                  :force => true do |t|
     t.string   "title"
     t.string   "url"
     t.text     "text"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
     t.integer  "user_id"
+    t.integer  "reputation",                :default => 0
   end
 
   create_table "comments", :force => true do |t|
-    t.text     "content",          :null => false
+    t.text     "content",                   :null => false
     t.integer  "user_id"
     t.integer  "commentable_id"
     t.string   "commentable_type"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "reputation",                :default => 0
   end
 
   add_index "comments", ["commentable_id", "commentable_type"], :name => "index_comments_on_commentable_id_and_commentable_type"
 
-  create_table "users", :force => true do |t|
-    t.string   "email",            :null => false
-    t.string   "crypted_password", :null => false
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+  create_table "users",                     :force => true do |t|
+    t.string   "email",                     :null => false
+    t.string   "crypted_password",          :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
-  create_table "votes", :force => true do |t|
-    t.boolean  "value",        :null => false
-    t.integer  "user_id",      :null => false
-    t.integer  "votable_id",   :null => false
-    t.string   "votable_type", :null => false
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+  create_table "votes",                     :force => true do |t|
+    t.boolean  "value",                     :null => false
+    t.integer  "user_id",                   :null => false
+    t.integer  "votable_id",                :null => false
+    t.string   "votable_type",              :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
 end

@@ -20,7 +20,7 @@ describe "Articles" do
     it "cannot create an article" do
       visit '/articles/new'
       
-      page.should have_content("You must be logged in to access this section")
+      page.should have_content("Forgot your password?")
     end
   end
 
@@ -32,7 +32,7 @@ describe "Articles" do
       fill_in 'Title', :with => "Bees?"
       fill_in 'Text', :with => "No, beads!"
     
-      click_button('Create Article')
+      click_button('Submit Article')
     
       page.should have_content('Article was successfully created.')
     end
@@ -40,7 +40,7 @@ describe "Articles" do
     it "won't create an invalid article" do
       visit "/articles/new"
     
-      click_button('Create Article')
+      click_button('Submit Article')
     
       page.should have_content('Article text or url must be present')
       page.should have_content("Title can't be blank")
@@ -50,7 +50,7 @@ describe "Articles" do
       visit "/articles/#{article.id}/edit"
       
       fill_in 'Url', :with => 'http://foo.bar'
-      click_button 'Update Article'
+      click_button 'Submit Article'
     
       visit "/articles/#{article.id}"
       page.should have_content('http://foo.bar')
@@ -61,7 +61,7 @@ describe "Articles" do
     
       fill_in 'Text', :with => ''
       fill_in 'Url', :with => ''
-      click_button 'Update Article'
+      click_button 'Submit Article'
   
       page.should have_content('Article text or url must be present')
     end

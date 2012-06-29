@@ -4,7 +4,8 @@ class SessionsController < ApplicationController
   end
   
   def create
-    if user = User.authenticate(params[:email], params[:password])
+    user = User.authenticate(params[:email], params[:password])
+    if user
       self.current_user = user
       flash[:success] = "You are now logged in!"
       redirect_to root_url

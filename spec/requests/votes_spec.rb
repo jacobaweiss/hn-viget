@@ -3,11 +3,11 @@ require 'spec_helper'
 
 describe "Votes" do
   let!(:user)     { Factory(:user) }
-  let!(:comment)  { Factory(:comment, :commentable => article, :user => user, :votes => [vote3]) }
-  let!(:vote1)    { Factory(:vote, :value => true, :user => user) }
-  let!(:vote2)    { Factory(:vote, :value => true) }
-  let!(:vote3)    { Factory(:vote, :value => true, :user => user) }
-  let(:article)   { Factory(:article, :votes => [vote1, vote2], :user => user )}
+  let!(:article)  { Factory(:article, :user => user) }
+  let!(:comment)  { Factory(:comment, :commentable => article, :user => user) }
+  let!(:vote1)    { Factory(:vote, :value => true, :user => user, :votable => article) }
+  let!(:vote2)    { Factory(:vote, :value => true, :votable => article) }
+  let!(:vote3)    { Factory(:vote, :value => true, :user => user, :votable => comment) }
   
   before(:each) do
     visit article_path(article)
@@ -15,7 +15,7 @@ describe "Votes" do
   
   describe "when viewing a votable object before voting" do
     
-    it "should display the vote count for article and comment" do    
+    it "should display the vote count for article and comment" do
       page.should have_content('2')
       page.should have_content('1')
     end

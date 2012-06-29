@@ -1,45 +1,54 @@
-<ul id="index-page">
-<% @articles.each do |article| %>
-	<li>
-		<table>
-			<tr>
-				<td>
-					<% if article.url? %>
-						<%= link_to article.title, article.url %> | (<%= article.url %>)
-					<% else %>
-						<%= link_to article.title, article %>
-					<% end %>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					created <%= time_ago_in_words(article.created_at) %> ago by <%= link_to article.user.email, article.user %> | <%= link_to pluralize(article.comments.count, 'comment'), article %> 
-					<% if current_user == article.user %>
-					 	| 
-						<%= link_to "Destroy", article, method: :delete, data: { confirm: 'Are you sure?' } %>
-					<% end %>
-				</td>
-			</tr>
-			<tr>
-				<td>
-				<span>
-					<% unless current_user && current_user.has_voted?(article) %>
-						<span id="up-article-<%= article.id %>"><%= link_to "▲", article_upvote_path(article), :remote => true %></span>
-					<% end %>
-				</span>
-				<span id="vote-<%= article.id %>">
-					<%= article.reputation %>
-				</span>
-				<span>
-					<% unless current_user && current_user.has_voted?(article) %>
-						<span id="down-article-<%= article.id %>"><%= link_to "▼", article_downvote_path(article), :remote => true %></span>
-					<% end %>
-				</span>
-				</td>
-			</tr>
-		</table>
-	</li>
-<% end %>
+<div class="span2">
+	<ul class="nav nav-pills">
+		<li><%= link_to 'Newest', root_path %></li>
+		<li class="dropdown" id="sortmenu">
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#sortmenu">
+				Top
+				<b class="caret"></b>
+			</a>
+			<ul class="dropdown-menu">
+				<li><a href="/day">Day</a></li>
+				<li><a href="/month">Month</a></li>
+				<li><a href="/year">Year</a></li>
+				<li><a href="/top">All Time</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+<div class="span8 offset0">
+	<ul id="index-page">
+		<li><h3>Articles</h3></li>
+	<% @articles.each do |article| %>
+		<li>
+			<table>
+				<tr>
+					<td>
+						<% if article.url? %>
+							<%= link_to article.title, article.url %> | (<%= article.url %>)
+						<% else %>
+							<%= link_to article.title, article %>
+						<% end %>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<%= time_ago_in_words(article.created_at) %> ago by <%= link_to article.user.email, article.user %> | <%= link_to pluralize(article.comments.count, 'comment'), article %> 
+						<% if current_user == article.user %>
+						 	| 
+							<%= link_to "Destroy", article, method: :delete, data: { confirm: 'Are you sure?' } %>
+						<% end %>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<%= render 'shared/votes', :votable => article %>
+					</td>
+				</tr>
+			</table>
+		</li>
+	<% end %>
+	</ul>
+</div>
+<ul class="nav nav-pills">
+	<li><%= link_to_next_page @articles, 'More', :class => "span1" %></li>
 </ul>
-
-<%= link_to_next_page @articles, 'More' %>

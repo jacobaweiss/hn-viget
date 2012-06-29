@@ -1,0 +1,25 @@
+<span>
+	<% unless current_user && current_user.has_voted?(votable) %>
+		<span id="up-<%= votable.class.to_s.downcase %>-<%= votable.id %>">
+			<% if votable.class.to_s == 'Article' %>
+				<%= link_to "\u25B2", article_vote_path(votable, :value => true), :remote => true %>
+			<% else %>
+				<%= link_to "\u25B2", comment_vote_path(votable, :value => true), :remote => true %>
+			<% end %>
+		</span>
+	<% end %>
+</span>
+<span id="vote-<%= votable.id %>">
+	<%= votable.reputation %>
+</span>
+<span>
+	<% unless current_user && current_user.has_voted?(votable) %>
+		<span id="down-<%= votable.class.to_s.downcase %>-<%= votable.id %>">
+			<% if votable.class.to_s == 'Article' %>
+				<%= link_to "\u25BC", article_vote_path(votable, :value => false), :remote => true %>
+			<% else %>
+				<%= link_to "\u25BC", comment_vote_path(votable, :value => false), :remote => true %>
+			<% end %>
+		</span>
+	<% end %>
+</span>

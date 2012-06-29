@@ -1,19 +1,9 @@
 <!-- <p id="notice"><%= notice %></p> -->
 <h1><%= @article.title %></h1>
 <table>
-	<% unless current_user && current_user.has_voted?(@article) %>
-		<tr>
-			<td id="up-article-<%= @article.id %>"><%= link_to "▲", article_upvote_path(@article), :remote => true %></td>
-		</tr>
-	<% end %>
 	<tr>
-		<td><span id="vote-<%= @article.id %>"><%= @article.reputation %></span></td>
+		<td><%= render 'shared/votes', :votable => @article %></td>
 	</tr>
-	<% unless current_user && current_user.has_voted?(@article) %>
-	<tr>
-		<td id="down-article-<%= @article.id %>"><%= link_to "▼", article_downvote_path(@article), :remote => true %></td>
-	</tr>
-	<% end %>
 	<tr>
 		<td><%= link_to @article.url, @article.url %></td>
 	</tr>

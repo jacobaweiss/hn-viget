@@ -12,7 +12,7 @@ describe "Users" do
       fill_in 'Password', :with => 'foobar'
       fill_in 'Password confirmation', :with => 'foobar'
 
-      click_button('Create User')
+      click_button('Create Account')
     
       page.should have_content('Your account has been successfully created!')
     end
@@ -24,14 +24,14 @@ describe "Users" do
       fill_in 'user_password', :with => 'foobar'
       fill_in 'user_password_confirmation', :with => 'foobar'
 
-      click_button('Create User')
+      click_button('Create Account')
       page.should have_content("Email has already been taken")
     end
     
     describe "when trying to vote" do
       it "should redirect to login page" do
-        visit article_upvote_path(article)
-        page.should have_content('You must be logged in to access this section')        
+        visit article_vote_path(article, :value => true)
+        page.should have_content('Forgot your password?')        
       end
     end
   end
@@ -59,7 +59,7 @@ describe "Users" do
     describe "voting" do
       
       it "can vote on an article" do
-        visit article_upvote_path(article)
+        visit article_vote_path(article, :value => true)
         page.should have_content('1')
       end
       
@@ -68,7 +68,7 @@ describe "Users" do
         let!(:comment) { Factory(:comment, :user => user, :votes => [vote]) }
         
         before do
-          visit article_upvote_path(article)
+          visit article_vote_path(article, :value => true)
           page.should have_content('1')
         end
         
@@ -78,7 +78,7 @@ describe "Users" do
         end
         
         it "cannot vote again" do
-          visit article_upvote_path(article)
+          visit article_vote_path(article, :value => true)
           page.should have_content('You have already voted on this.')
         end
         
