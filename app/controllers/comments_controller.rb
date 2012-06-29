@@ -30,24 +30,10 @@ class CommentsController < ApplicationController
     end
   end
   
-  def upvote
+  def vote
     @comment = Comment.find(params[:comment_id])
     unless current_user.has_voted?(@comment)
-      @comment.votes.create(:value => true, :user => current_user)
-      @comment.reload
-      respond_to do |format|
-        format.html { redirect_to @comment.article }
-        format.js
-      end
-    else
-      redirect_to @comment.article, :notice => "You have already voted on this."
-    end
-  end
-
-  def downvote
-    @comment = Comment.find(params[:comment_id])
-    unless current_user.has_voted?(@comment)
-      @comment.votes.create(:value => false, :user => current_user)
+      @comment.votes.create(:value => params[:value], :user => current_user)
       @comment.reload
       respond_to do |format|
         format.html { redirect_to @comment.article }
