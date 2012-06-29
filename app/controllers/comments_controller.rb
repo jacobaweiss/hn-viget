@@ -36,11 +36,11 @@ class CommentsController < ApplicationController
       @comment.votes.create(:value => params[:value], :user => current_user)
       @comment.reload
       respond_to do |format|
-        format.html { redirect_to @comment.article }
+        format.html { redirect_to @comment.article, only_path: true }
         format.js
       end
     else
-      redirect_to @comment.article, :notice => "You have already voted on this."
+      redirect_to @comment.article, :notice => "You have already voted on this.", only_path: true
     end
   end
   
@@ -56,7 +56,7 @@ class CommentsController < ApplicationController
   def time_limit
     @comment = @parent.comments.find(params[:id])
     if (Time.now - @comment.created_at) > 5.minutes
-      redirect_to @comment.article, :notice => "Too much time has passed to update this comment."
+      redirect_to @comment.article, :notice => "Too much time has passed to update this comment.", only_path: true
     end
   end
 end

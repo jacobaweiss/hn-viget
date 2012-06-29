@@ -34,7 +34,7 @@ class ArticlesController < ApplicationController
   def create
     @article = self.current_user.articles.create(params[:article])
     if @article.save
-      redirect_to @article, notice: 'Article was successfully created.'
+      redirect_to @article, notice: 'Article was successfully created.', only_path: true
     else
       render action: "new"
     end
@@ -42,7 +42,7 @@ class ArticlesController < ApplicationController
 
   def update
     if @article.update_attributes(params[:article])
-      redirect_to @article, notice: 'Article was successfully updated.'
+      redirect_to @article, notice: 'Article was successfully updated.', only_path: true
     else
       render action: "edit"
     end
