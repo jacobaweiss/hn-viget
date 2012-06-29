@@ -19,5 +19,6 @@ Hn::Application.routes.draw do
   match '/signup',          :to => 'users#new'
   match '/change_password', :to => 'users#password'
   match '/reset_password',  :to => 'password_resets#new'
+  match '/about',           :to => 'pages#about'
   match '/:duration',       :to => 'articles#index'
 end

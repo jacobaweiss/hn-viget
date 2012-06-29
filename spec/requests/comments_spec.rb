@@ -18,7 +18,7 @@ describe "Comments" do
     describe "when user is not logged in" do
       it "cannot create a comment" do
         click_link "Add a comment"
-        page.should have_content('You must be logged in to access this section')
+        page.should have_content('Forgot your password?')
       end
     end
   
