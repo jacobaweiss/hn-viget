@@ -14,7 +14,7 @@ class Vote < ActiveRecord::Base
   private
   
   def count_reputation
-    score = self.votable.votes.upvotes.count - self.votable.votes.downvotes.count
-    self.votable.update_attributes(:reputation => score)
+    score = votable.votes.upvotes.count - votable.votes.downvotes.count
+    votable.update_attributes(:reputation => score)
   end
 end

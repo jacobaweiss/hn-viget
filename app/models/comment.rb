@@ -9,8 +9,7 @@ class Comment < ActiveRecord::Base
   validates :content, :presence => true
   
   def article
-    return @article if defined?(@article)
-    @article = commentable.is_a?(Article) ? commentable : commentable.article
+    @article ||= commentable.is_a?(Article) ? commentable : commentable.article
   end
 
 end
